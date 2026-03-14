@@ -1,6 +1,6 @@
 # k8s-helm-observability-starter
 
-Minimal but production-flavoured Kubernetes + Helm starter project.
+ Production-flavoured Kubernetes + Helm project.
 
 ## What this repo demonstrates (skills)
 - **Helm charting**: templating, values, helpers, sane defaults
