@@ -1,5 +1,4 @@
-
- apiVersion: v2
+apiVersion: v2
 name: hello-svc
 description: Minimal Java service chart demonstrating probes/resources/config/metrics annotations.
 type: application
