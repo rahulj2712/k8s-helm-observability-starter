@@ -1,0 +1,40 @@
+
+ name: ci
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  app-build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+          cache: maven
+
+      - name: Build app
+        working-directory: app
+        run: mvn -q test package
+
+  helm:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: azure/setup-helm@v4
+        with:
+          version: v3.14.4
+
+      - name: Helm lint
+        run: helm lint charts/hello-svc
+
+      - name: Helm template (render manifests)
+        run: helm template hello charts/hello-svc --namespace demo > /tmp/rendered.yaml
+
+      - name: Show rendered output size
+        run: wc -l /tmp/rendered.yaml
